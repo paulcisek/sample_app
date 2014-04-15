@@ -1,0 +1,21 @@
+
+StaticPages
+  About Page
+    should have the content 'About Us'
+    should have the title 'About Us'
+  Home Page
+    should not have a custom page title
+    should have the base title
+    should have the content 'Sample App'
+  Help Page
+    should have the content 'Help'
+    should have the title 'Help'
+  Contact Page
+    should have the title 'Contact'
+    should have the content 'Contact'
+
+Finished in 0.35792 seconds
+9 examples, 0 failures
+
+Randomized with seed 58141
+
