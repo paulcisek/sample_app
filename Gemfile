@@ -7,6 +7,9 @@ gem 'pg', '0.15.1'
 gem 'bootstrap-sass'
 gem 'sprockets', '2.11.0'
 gem 'bcrypt-ruby'
+gem 'faker'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
