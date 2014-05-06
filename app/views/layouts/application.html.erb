@@ -13,6 +13,8 @@
       <% flash.each do |key, value| %>
         <% if key.to_s == 'error'%>
             <% div_class = "danger" %>
+        <% elsif key.to_s == 'notice' %>
+            <% div_class = 'info' %>
         <% else %>
             <% div_class = key %>
         <% end %>

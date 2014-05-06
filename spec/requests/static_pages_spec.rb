@@ -16,6 +16,50 @@ describe 'StaticPages' do
 
     it_should_behave_like "all static pages"
     it { should_not have_title('| Home') }
+
+    describe "for signed in users" do
+      let(:user) { FactoryGirl.create(:user) }
+      before { sign_in user }
+
+      describe "with feed" do
+        before do
+          FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
+          visit root_path
+        end
+        it "should render the user's feed" do
+          user.feed.each do |item|
+            expect(page).to have_selector("li##{item.id}", text: item.content)
+          end
+        end
+        context "containing 1 micropost" do
+          it { should have_content("1 micropost") }
+        end
+        context "containing more than 1 micropost" do
+          before do
+            FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+            visit root_path
+          end
+          it { should have_content("#{user.feed.count} microposts") }
+        end
+
+      end
+      describe "pagination" do
+        before do
+          31.times do |i|
+            FactoryGirl.create(:micropost, user: user, content: "#{i}")
+          end
+          visit root_path
+        end
+        it { should have_selector('div.pagination') }
+
+        it " should list each feed" do
+          user.feed.paginate(page: 1).each do |feed|
+            expect(page).to have_selector("li##{feed.id}", text: feed.content)
+          end
+        end
+
+      end
+    end
   end
   describe 'Help Page' do
     before { visit help_path }
