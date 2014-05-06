@@ -18,7 +18,7 @@
 
 $(document).ready(function(){
     var totalChars      = 140; //Total characters allowed in textarea
-    var countTextBox    = $('#counttextarea') // Textarea input box
+    var countTextBox    = $('.counttextarea') // Textarea input box
     var charsCountEl    = $('#countchars'); // Remaining chars count will be displayed here
 
 

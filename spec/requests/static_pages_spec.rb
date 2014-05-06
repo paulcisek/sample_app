@@ -21,6 +21,17 @@ describe 'StaticPages' do
       let(:user) { FactoryGirl.create(:user) }
       before { sign_in user }
 
+      describe "following/followers counts" do
+        let(:other_user) { FactoryGirl.create(:user) }
+        before do
+          other_user.follow!(user)
+          visit root_path
+        end
+
+        it { should have_link("0 following", href: following_user_path(user)) }
+        it { should have_link("1 followers", href: followers_user_path(user)) }
+      end
+
       describe "with feed" do
         before do
           FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
